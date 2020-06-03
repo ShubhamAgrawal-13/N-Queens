@@ -5,7 +5,7 @@ from time import sleep
 import sys
 
 pygame.init()
-TIME=0.05
+TIME=0.013
 white = (255, 255, 255) 
 green = (0, 255, 0) 
 blue = (0, 0, 128) 
@@ -100,11 +100,20 @@ def check_safe(row, col, board, n):
 	pygame.display.update() 
 	return True
 
+def sol():
+	global n,win,f,width
+	t=width//n
+	p_label=f.render(f"Checking for Solution...",1 ,(0,0,0))
+	win.blit(p_label,((n//2)*t,(n)*t+10))
+	p_label=f.render(f"Solution Exists !!!      ",1 ,(0,255,0))
+	win.blit(p_label,((n//2)*t,(n)*t+10))
+	pygame.display.update() 
 
 def solve(col,board,n):
 	sleep(TIME)
 	if(col==n):
 		#cprint()
+		sol()
 		sleep(10)
 		pygame.quit()
 		sys.exit(0)
@@ -135,8 +144,8 @@ def drawWindow(win,width,n,board,f):
 	for i in range(n):
 		for j in range(n):
 			board[i][j].draw_cube(win,width,n)
-	level_label=f.render(f"Board: {n}*{n}",1,(255,255,0))
-	p_label=f.render(f"N-Queens",1 ,(0,255,0))
+	level_label=f.render(f"Board: {n} x {n}",1,(255,255,0))
+	p_label=f.render(f"Checking for Solution...",1 ,(0,255,0))
 	win.blit(level_label,(10,(n)*t+10))
 	win.blit(p_label,((n//2)*t,(n)*t+10))
 	pygame.display.update() 
